@@ -1,0 +1,203 @@
+// Lines
+let
+    Source = Csv.Document(File.Contents("C:\Users\sadia\Downloads\Testing Journal Entries- python\general_ledger.csv"),[Delimiter=",", Columns=15, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"entry_id", type text}, {"line_no", Int64.Type}, {"posting_date", type date}, {"effective_date", type date}, {"account_code", Int64.Type}, {"account_name", type text}, {"account_type", type text}, {"cost_centre", type text}, {"user_id", type text}, {"entry_type", type text}, {"narration", type text}, {"debit", type number}, {"credit", type number}, {"approval_status", type text}, {"approver_id", type text}})
+in
+    #"Changed Type"
+
+// Answerkey
+let
+    Source = Csv.Document(File.Contents("C:\Users\sadia\Downloads\Testing Journal Entries- python\answer_key.csv"),[Delimiter=",", Columns=3, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Changed Type" = Table.TransformColumnTypes(Source,{{"Column1", type text}, {"Column2", type text}, {"Column3", type text}}),
+    #"Promoted Headers" = Table.PromoteHeaders(#"Changed Type", [PromoteAllScalars=true]),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Promoted Headers",{{"entry_id", type text}, {"anomaly_type", type text}, {"detail", type text}})
+in
+    #"Changed Type1"
+
+// TrialBalance
+let
+    Source = Csv.Document(File.Contents("C:\Users\sadia\Downloads\Testing Journal Entries- python\trial_balance.csv"),[Delimiter=",", Columns=6, Encoding=1252, QuoteStyle=QuoteStyle.None]),
+    #"Promoted Headers" = Table.PromoteHeaders(Source, [PromoteAllScalars=true]),
+    #"Changed Type" = Table.TransformColumnTypes(#"Promoted Headers",{{"account_code", Int64.Type}, {"account_name", type text}, {"account_type", type text}, {"total_debit", type number}, {"total_credit", type number}, {"net_balance", type number}})
+in
+    #"Changed Type"
+
+// DebitLines
+let
+    Source = Lines,
+    #"Filtered Rows" = Table.SelectRows(Source, each ([line_no] = 1)),
+    #"Removed Other Columns" = Table.SelectColumns(#"Filtered Rows",{"entry_id", "posting_date", "effective_date", "account_code", "cost_centre", "user_id", "entry_type", "narration", "debit", "approval_status"}),
+    #"Renamed Columns" = Table.RenameColumns(#"Removed Other Columns",{{"account_code", "dr_acc"}, {"debit", "Amt"}})
+in
+    #"Renamed Columns"
+
+// CreditLines
+let
+    Source = Lines,
+    #"Filtered Rows" = Table.SelectRows(Source, each ([line_no] = 2)),
+    #"Renamed Columns" = Table.RenameColumns(#"Filtered Rows",{{"account_code", "Cr.acc"}, {"credit", "amt"}}),
+    #"Removed Other Columns" = Table.SelectColumns(#"Renamed Columns",{"entry_id", "Cr.acc"})
+in
+    #"Removed Other Columns"
+
+// Entries
+let
+    Source = DebitLines,
+    #"Merged Queries" = Table.NestedJoin(Source, {"entry_id"}, CreditLines, {"entry_id"}, "CreditLines", JoinKind.Inner),
+    #"Expanded CreditLines" = Table.ExpandTableColumn(#"Merged Queries", "CreditLines", {"Cr.acc"}, {"CreditLines.Cr.acc"}),
+    #"Filtered Rows" = Table.SelectRows(#"Expanded CreditLines", each true),
+    #"Added Custom" = Table.AddColumn(#"Filtered Rows", "day_num ", each Date.DayOfWeek([posting_date], Day.Sunday)),
+    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"day_num ", Int64.Type}}),
+    #"Added Custom1" = Table.AddColumn(#"Changed Type", "is_holiday", each List.Contains(
+    {"2025-04-14","2025-04-18","2025-05-01","2025-08-15","2025-08-27",
+     "2025-10-02","2025-10-20","2025-10-21","2025-11-05","2025-12-25",
+     "2026-01-26","2026-03-04"},
+    Date.ToText([posting_date], "yyyy-MM-dd")
+)),
+    #"Changed Type1" = Table.TransformColumnTypes(#"Added Custom1",{{"is_holiday", type logical}}),
+    #"Added Custom2" = Table.AddColumn(#"Changed Type1", "lag_days", each Duration.Days([posting_date] - [effective_date])),
+    #"Changed Type2" = Table.TransformColumnTypes(#"Added Custom2",{{"lag_days", Int64.Type}}),
+    #"Added Custom4" = Table.AddColumn(#"Changed Type2", "seq_num", each Number.From(Text.Replace([entry_id], "JE", ""))),
+    #"Changed Type3" = Table.TransformColumnTypes(#"Added Custom4",{{"seq_num", Int64.Type}}),
+    #"Renamed Columns" = Table.RenameColumns(#"Changed Type3",{{"CreditLines.Cr.acc", "cr.acc"}}),
+    #"Renamed Columns1" = Table.RenameColumns(#"Renamed Columns",{{"cr.acc", "cr_acc"}}),
+    #"Added Custom3" = Table.AddColumn(#"Renamed Columns1", "acc_pair", each Text.From([dr_acc]) & " / " & Text.From([cr_acc]))
+in
+    #"Added Custom3"
+
+// T1_RoundNumbers
+let
+    Source = Entries,
+    Filtered = Table.SelectRows(Source, each
+        [Amt] >= 2500000
+        and Number.Mod([Amt], 100000) = 0
+        and [entry_type] = "Manual"),
+    Tagged = Table.AddColumn(Filtered, "test_name", each "Round number", type text)
+in
+    Tagged
+
+// T2_Non-business day
+let
+    Source = Entries,
+    #"Filtered Rows" = Table.SelectRows(Source, each ([entry_type] = "Manual")),
+    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each ([#"day_num "] = 0 or [#"day_num "] = 6 or [is_holiday] = true)),
+    #"Added Custom" = Table.AddColumn(#"Filtered Rows1", "test_name", each "Non-business day"),
+    #"Changed Type" = Table.TransformColumnTypes(#"Added Custom",{{"test_name", type text}})
+in
+    #"Changed Type"
+
+// T3_RareUsers
+let
+    Source = Entries,
+    Counted = Table.Group(Source, {"user_id"},
+        {{"n_entries", each Table.RowCount(_), Int64.Type}}),
+    Rare = Table.SelectRows(Counted, each [n_entries] < 10),
+    Merged = Table.NestedJoin(Source, {"user_id"}, Rare, {"user_id"},
+        "r", JoinKind.Inner),
+    Cleaned = Table.RemoveColumns(Merged, {"r"}),
+    Tagged = Table.AddColumn(Cleaned, "test_name", each "Rare user", type text)
+in
+    Tagged
+
+// T4_BackDated
+let
+    Source = Entries,
+    Filtered = Table.SelectRows(Source, each [lag_days] > 7),
+    Tagged = Table.AddColumn(Filtered, "test_name", each "Back-dated", type text)
+in
+    Tagged
+
+// T5_BelowThreshold
+let
+    Source = Entries,
+    #"Filtered Rows" = Table.SelectRows(Source, each [Amt] >= 470000 and [Amt] < 500000),
+    #"Filtered Rows1" = Table.SelectRows(#"Filtered Rows", each ([entry_type] = "Manual")),
+    #"Added Custom" = Table.AddColumn(#"Filtered Rows1", "test_name", each "Below approval threshold"),
+    #"Filtered Rows2" = Table.SelectRows(#"Added Custom", each true)
+in
+    #"Filtered Rows2"
+
+// T6_RarePairings
+let
+    Source = Entries,
+    Counted = Table.Group(Source, {"acc_pair"},
+        {{"n_pairs", each Table.RowCount(_), Int64.Type}}),
+    Rare = Table.SelectRows(Counted, each [n_pairs] < 5),
+    Merged = Table.NestedJoin(Source, {"acc_pair"}, Rare, {"acc_pair"},
+        "r", JoinKind.Inner),
+    Expanded = Table.ExpandTableColumn(Merged, "r", {"n_pairs"}, {"n_pairs"}),
+    Tagged = Table.AddColumn(Expanded, "test_name", each "Rare account pairing", type text)
+in
+    Tagged
+
+// T7_NarrationKeywords
+let
+    Source = Entries,
+    Keywords = {"plug", "difference", "reversal", "temporary", "pending",
+                "adjustment", "squaring", "correction",
+                "as per instruction", "to be corrected"},
+    Filtered = Table.SelectRows(Source, each
+        List.AnyTrue(
+            List.Transform(Keywords, (k) => Text.Contains(Text.Lower([narration]), k))
+        )),
+    Tagged = Table.AddColumn(Filtered, "test_name", each "Narration keyword", type text)
+in
+    Tagged
+
+// T8_SequenceGaps
+let
+    Source = Entries,
+    Nums = List.Sort(Source[seq_num]),
+    MinN = List.Min(Nums),
+    MaxN = List.Max(Nums),
+    Full = List.Numbers(MinN, MaxN - MinN + 1),
+    Gaps = List.Difference(Full, Nums),
+    AsTable = Table.FromList(Gaps, Splitter.SplitByNothing(),
+        {"seq_num"}, null, ExtraValues.Error),
+    Typed = Table.TransformColumnTypes(AsTable, {{"seq_num", Int64.Type}}),
+    WithId = Table.AddColumn(Typed, "entry_id",
+        each "JE" & Text.From([seq_num]), type text),
+    Tagged = Table.AddColumn(WithId, "test_name", each "Sequence gap", type text)
+in
+    Tagged
+
+// AllExceptions
+let
+    Source = Table.Combine({T8_SequenceGaps, T1_RoundNumbers, #"T2_Non-business day", T3_RareUsers, T4_BackDated, T5_BelowThreshold, T6_RarePairings, T7_NarrationKeywords}),
+    #"Removed Other Columns" = Table.SelectColumns(Source,{"entry_id", "test_name", "posting_date", "user_id", "entry_type", "Amt"})
+in
+    #"Removed Other Columns"
+
+// ScoredExceptions
+let
+    Source = AllExceptions,
+    Grouped = Table.Group(Source, {"entry_id"}, {
+        {"tests_triggered", each Table.RowCount(_), Int64.Type},
+        {"tests", each Text.Combine(List.Sort(List.Distinct(_[test_name])), ", "), type text}
+    }),
+    Ranked = Table.AddColumn(Grouped, "risk_rank", each
+        if [tests_triggered] >= 3 then "High"
+        else if [tests_triggered] = 2 then "Medium"
+        else "Low", type text)
+in
+    Ranked
+
+// Detection
+let
+    Source = Answerkey,
+    Merged = Table.NestedJoin(Source, {"entry_id"},
+        ScoredExceptions, {"entry_id"}, "found", JoinKind.LeftOuter),
+    Expanded = Table.ExpandTableColumn(Merged, "found",
+        {"tests", "risk_rank"}, {"tests", "risk_rank"}),
+    Status = Table.AddColumn(Expanded, "detected",
+        each if [tests] = null then "MISSED" else "caught", type text)
+in
+    Status
+
+// CompletenessCheck
+let
+    Source = Lines,
+    #"Filtered Rows" = Table.SelectRows(Source, each [posting_date] > #date(2026, 3, 31))
+in
+    #"Filtered Rows"

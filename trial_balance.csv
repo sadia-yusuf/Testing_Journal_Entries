@@ -1,0 +1,35 @@
+account_code,account_name,account_type,total_debit,total_credit,net_balance
+1110,Bank - current account,Asset,5177181539.19,3396685327.49,1780496211.7
+1200,Trade receivables,Asset,8137211067.19,5139720884.37,2997490182.82
+1400,Prepaid expenses,Asset,0.0,151962449.94,-151962449.94
+1410,Advance to suppliers,Asset,335753452.66,0.0,335753452.66
+1510,Accumulated depreciation,Asset,1333337.32,1007670683.37,-1006337346.05
+1600,Input GST receivable,Asset,149139275.14,0.0,149139275.14
+1900,Suspense account,Asset,143275583.96,2492709.26,140782874.7
+2100,Trade payables,Liability,2947688105.88,5193033420.19,-2245345314.31
+2110,Accrued expenses,Liability,0.0,928161155.11,-928161155.11
+2120,Provision for employee benefits,Liability,0.0,5795039493.14,-5795039493.14
+2200,Output GST payable,Liability,0.0,178164347.53,-178164347.53
+2210,TDS payable,Liability,0.0,58952413.25,-58952413.25
+2310,Interest accrued but not due,Liability,0.0,568940672.52,-568940672.52
+2400,Unearned revenue,Liability,1921327.22,0.0,1921327.22
+3200,Retained earnings,Equity,1459361.61,0.0,1459361.61
+4100,Revenue - product sales,Income,2492709.26,5931416882.41,-5928924173.15
+4110,Revenue - service income,Income,0.0,2029551164.47,-2029551164.47
+4200,Other income,Income,0.0,102500000.0,-102500000.0
+4300,Interest income,Income,0.0,37460654.82,-37460654.82
+5100,Cost of materials consumed,Expense,3163502693.36,0.0,3163502693.36
+5200,Employee benefit expense,Expense,5795039493.14,0.0,5795039493.14
+5210,Contract staff cost,Expense,460743116.27,0.0,460743116.27
+5300,Rent expense,Expense,441613107.91,0.0,441613107.91
+5310,Power and fuel,Expense,354994940.4,0.0,354994940.4
+5320,Repairs and maintenance,Expense,225353778.42,0.0,225353778.42
+5330,Travel and conveyance,Expense,148771344.97,0.0,148771344.97
+5340,Legal and professional fees,Expense,546250165.88,0.0,546250165.88
+5350,Advertisement and marketing,Expense,650510811.15,0.0,650510811.15
+5360,Insurance,Expense,151962449.94,0.0,151962449.94
+5370,Communication expense,Expense,53495292.86,0.0,53495292.86
+5380,Printing and stationery,Expense,30892936.85,0.0,30892936.85
+5400,Depreciation and amortisation,Expense,1007670683.37,0.0,1007670683.37
+5500,Finance cost,Expense,568940672.52,0.0,568940672.52
+5700,Miscellaneous expenses,Expense,25888348.72,1333337.32,24555011.4

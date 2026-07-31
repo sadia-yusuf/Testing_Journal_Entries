@@ -1,0 +1,125 @@
+entry_id,anomaly_type,detail
+JE1084046,back_dated,Posted 9 days after effective date
+JE1084047,back_dated,Posted 12 days after effective date
+JE1084048,back_dated,Posted 14 days after effective date
+JE1084049,back_dated,Posted 41 days after effective date
+JE1084050,back_dated,Posted 29 days after effective date
+JE1084051,back_dated,Posted 19 days after effective date
+JE1084052,back_dated,Posted 18 days after effective date
+JE1084053,back_dated,Posted 28 days after effective date
+JE1084054,back_dated,Posted 21 days after effective date
+JE1084055,back_dated,Posted 22 days after effective date
+JE1084056,back_dated,Posted 33 days after effective date
+JE1084057,back_dated,Posted 13 days after effective date
+JE1084058,back_dated,Posted 11 days after effective date
+JE1084059,back_dated,Posted 18 days after effective date
+JE1084060,back_dated,Posted 11 days after effective date
+JE1084061,back_dated,Posted 19 days after effective date
+JE1084062,back_dated,Posted 41 days after effective date
+JE1084063,back_dated,Posted 24 days after effective date
+JE1084064,below_approval_threshold,"472,906 is 94.6% of the 500,000 limit"
+JE1084065,below_approval_threshold,"493,536 is 98.7% of the 500,000 limit"
+JE1084066,below_approval_threshold,"472,086 is 94.4% of the 500,000 limit"
+JE1084067,below_approval_threshold,"487,328 is 97.5% of the 500,000 limit"
+JE1084068,below_approval_threshold,"487,898 is 97.6% of the 500,000 limit"
+JE1084069,below_approval_threshold,"470,655 is 94.1% of the 500,000 limit"
+JE1084070,below_approval_threshold,"476,779 is 95.4% of the 500,000 limit"
+JE1084071,below_approval_threshold,"471,696 is 94.3% of the 500,000 limit"
+JE1084072,below_approval_threshold,"499,422 is 99.9% of the 500,000 limit"
+JE1084073,below_approval_threshold,"490,102 is 98.0% of the 500,000 limit"
+JE1084074,below_approval_threshold,"487,618 is 97.5% of the 500,000 limit"
+JE1084075,below_approval_threshold,"473,034 is 94.6% of the 500,000 limit"
+JE1084076,below_approval_threshold,"494,652 is 98.9% of the 500,000 limit"
+JE1084077,below_approval_threshold,"475,967 is 95.2% of the 500,000 limit"
+JE1084078,below_approval_threshold,"487,546 is 97.5% of the 500,000 limit"
+JE1084079,below_approval_threshold,"494,069 is 98.8% of the 500,000 limit"
+JE1084080,below_approval_threshold,"471,672 is 94.3% of the 500,000 limit"
+JE1084081,below_approval_threshold,"485,094 is 97.0% of the 500,000 limit"
+JE1084082,below_approval_threshold,"470,575 is 94.1% of the 500,000 limit"
+JE1084083,below_approval_threshold,"476,710 is 95.3% of the 500,000 limit"
+JE1084084,below_approval_threshold,"483,381 is 96.7% of the 500,000 limit"
+JE1084085,below_approval_threshold,"485,058 is 97.0% of the 500,000 limit"
+JE1084086,below_approval_threshold,"473,946 is 94.8% of the 500,000 limit"
+JE1084087,below_approval_threshold,"475,753 is 95.2% of the 500,000 limit"
+JE1084088,below_approval_threshold,"494,731 is 98.9% of the 500,000 limit"
+JE1084089,below_approval_threshold,"492,955 is 98.6% of the 500,000 limit"
+JE1084098,narration_keyword,Narration contains a review trigger word
+JE1084099,narration_keyword,Narration contains a review trigger word
+JE1084100,narration_keyword,Narration contains a review trigger word
+JE1084101,narration_keyword,Narration contains a review trigger word
+JE1084102,narration_keyword,Narration contains a review trigger word
+JE1084103,narration_keyword,Narration contains a review trigger word
+JE1084104,narration_keyword,Narration contains a review trigger word
+JE1084105,narration_keyword,Narration contains a review trigger word
+JE1084106,narration_keyword,Narration contains a review trigger word
+JE1084107,narration_keyword,Narration contains a review trigger word
+JE1084108,narration_keyword,Narration contains a review trigger word
+JE1084109,narration_keyword,Narration contains a review trigger word
+JE1084110,narration_keyword,Narration contains a review trigger word
+JE1084111,narration_keyword,Narration contains a review trigger word
+JE1084112,narration_keyword,Narration contains a review trigger word
+JE1084113,narration_keyword,Narration contains a review trigger word
+JE1084114,narration_keyword,Narration contains a review trigger word
+JE1084115,narration_keyword,Narration contains a review trigger word
+JE1084015,non_business_day_posting,Posted on 2025-11-30 (Sunday)
+JE1084016,non_business_day_posting,Posted on 2025-11-05 (Wednesday)
+JE1084017,non_business_day_posting,Posted on 2026-02-01 (Sunday)
+JE1084018,non_business_day_posting,Posted on 2025-09-28 (Sunday)
+JE1084019,non_business_day_posting,Posted on 2025-12-20 (Saturday)
+JE1084020,non_business_day_posting,Posted on 2026-01-11 (Sunday)
+JE1084021,non_business_day_posting,Posted on 2025-04-12 (Saturday)
+JE1084022,non_business_day_posting,Posted on 2025-06-07 (Saturday)
+JE1084023,non_business_day_posting,Posted on 2025-07-27 (Sunday)
+JE1084024,non_business_day_posting,Posted on 2025-07-26 (Saturday)
+JE1084025,non_business_day_posting,Posted on 2025-05-04 (Sunday)
+JE1084026,non_business_day_posting,Posted on 2025-10-12 (Sunday)
+JE1084027,non_business_day_posting,Posted on 2025-07-20 (Sunday)
+JE1084028,non_business_day_posting,Posted on 2026-03-21 (Saturday)
+JE1084029,non_business_day_posting,Posted on 2025-10-02 (Thursday)
+JE1084030,non_business_day_posting,Posted on 2025-09-28 (Sunday)
+JE1084031,non_business_day_posting,Posted on 2025-11-01 (Saturday)
+JE1084032,non_business_day_posting,Posted on 2025-04-18 (Friday)
+JE1084033,non_business_day_posting,Posted on 2025-05-24 (Saturday)
+JE1084034,non_business_day_posting,Posted on 2025-07-13 (Sunday)
+JE1084035,non_business_day_posting,Posted on 2026-02-14 (Saturday)
+JE1084036,non_business_day_posting,Posted on 2025-11-05 (Wednesday)
+JE1084090,rare_account_pairing,Dr 4100 / Cr 1900 occurs fewer than 5 times
+JE1084091,rare_account_pairing,Dr 4100 / Cr 1900 occurs fewer than 5 times
+JE1084092,rare_account_pairing,Dr 3200 / Cr 1110 occurs fewer than 5 times
+JE1084093,rare_account_pairing,Dr 3200 / Cr 1110 occurs fewer than 5 times
+JE1084094,rare_account_pairing,Dr 1510 / Cr 5700 occurs fewer than 5 times
+JE1084095,rare_account_pairing,Dr 1510 / Cr 5700 occurs fewer than 5 times
+JE1084096,rare_account_pairing,Dr 2400 / Cr 4110 occurs fewer than 5 times
+JE1084097,rare_account_pairing,Dr 2400 / Cr 4110 occurs fewer than 5 times
+JE1084037,rare_user,User U087 posts fewer than 10 entries in the year
+JE1084038,rare_user,User U087 posts fewer than 10 entries in the year
+JE1084039,rare_user,User U087 posts fewer than 10 entries in the year
+JE1084040,rare_user,User U091 posts fewer than 10 entries in the year
+JE1084041,rare_user,User U091 posts fewer than 10 entries in the year
+JE1084042,rare_user,User U104 posts fewer than 10 entries in the year
+JE1084043,rare_user,User U104 posts fewer than 10 entries in the year
+JE1084044,rare_user,User U104 posts fewer than 10 entries in the year
+JE1084045,rare_user,User U104 posts fewer than 10 entries in the year
+JE1084001,round_number_above_materiality,"Amount 10,000,000 exactly round"
+JE1084002,round_number_above_materiality,"Amount 10,000,000 exactly round"
+JE1084003,round_number_above_materiality,"Amount 2,500,000 exactly round"
+JE1084004,round_number_above_materiality,"Amount 10,000,000 exactly round"
+JE1084005,round_number_above_materiality,"Amount 5,000,000 exactly round"
+JE1084006,round_number_above_materiality,"Amount 7,500,000 exactly round"
+JE1084007,round_number_above_materiality,"Amount 10,000,000 exactly round"
+JE1084008,round_number_above_materiality,"Amount 10,000,000 exactly round"
+JE1084009,round_number_above_materiality,"Amount 7,500,000 exactly round"
+JE1084010,round_number_above_materiality,"Amount 2,500,000 exactly round"
+JE1084011,round_number_above_materiality,"Amount 7,500,000 exactly round"
+JE1084012,round_number_above_materiality,"Amount 10,000,000 exactly round"
+JE1084013,round_number_above_materiality,"Amount 2,500,000 exactly round"
+JE1084014,round_number_above_materiality,"Amount 7,500,000 exactly round"
+JE1020256,sequence_gap,Entry ID absent from the ledger
+JE1025976,sequence_gap,Entry ID absent from the ledger
+JE1048843,sequence_gap,Entry ID absent from the ledger
+JE1050411,sequence_gap,Entry ID absent from the ledger
+JE1051574,sequence_gap,Entry ID absent from the ledger
+JE1061168,sequence_gap,Entry ID absent from the ledger
+JE1063270,sequence_gap,Entry ID absent from the ledger
+JE1063366,sequence_gap,Entry ID absent from the ledger
+JE1074758,sequence_gap,Entry ID absent from the ledger
