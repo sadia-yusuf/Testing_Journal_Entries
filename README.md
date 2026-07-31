@@ -189,4 +189,4 @@ I build the procedures I previously performed by hand.
 
 Synthetic data generated for this project. No client data, client methodology or engagement material is used. Prepared as portfolio work, not as an audit deliverable.
 
-sadiayusuf23@gmail.com
+
