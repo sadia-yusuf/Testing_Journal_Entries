@@ -111,10 +111,10 @@ journal-entry-testing/
 │   ├── 01_generate_ledger.ipynb        generates the ledger and answer key
 │   └── 02_reconnaissance.ipynb         runs all eight tests, sets target figures
 ├── excel/
-│   ├── journal_entry_testing.xlsx      queries, data model, dashboard
-│   ├── powerquery_source.txt           all 16 M queries, readable
-│   ├── dax_measures.txt                11 Power Pivot measures
-│   └── screenshots/
+│   ├── journal_entry_testing_main.xlsx      queries, data model, dashboard
+│   ├── QueryText.txt                all 16 M queries, readable
+│   ├── dax_measures.txt                     11 Power Pivot measures
+│   
 ├── data/
 │   ├── trial_balance.csv               34 accounts
 │   ├── answer_key.csv                  124 planted anomalies
